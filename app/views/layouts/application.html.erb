@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TollsApp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <script type="text/javascript"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFcYiKhL9k3zpmdJoWCXMewRSc_HtJ7ys"></script>
+  <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js"></script>
+</head>
+<body>
+	<h1>Tolls</h1>
+<!-- 	<input id="start" type="text" onchange="calcRoute();" value="">	
+	<input id="end" type="text" onchange="calcRoute();" value=""> -->
+	<div id='control'>
+		<strong>Origin: </strong>
+		<select id="start" onchange="calcRoute();">
+		  <option value="new york, ny">New York</option>
+		  <option value="wilmington, de">Delaware</option>
+		</select>
+		<strong>Destination: </strong>
+		<select id="end" onchange="calcRoute();">
+		  <option value="new york, ny">New York</option>
+		  <option value="wilmington, de">Delaware</option>
+		</select>
+	</div>
+	<div id='map-canvas'></div>
+	<div id='directions-panel'></div>
+</body>
+</html>
