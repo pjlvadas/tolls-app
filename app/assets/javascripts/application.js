@@ -29,3 +29,25 @@ var App = {
 	Views: {}, 
 	Routers: {}
 };
+
+$(function() {
+	console.log('APP UP');
+	var mapOptions = {
+		zoom: 7,
+		center: new google.maps.LatLng(41.850033, -87.6500523),
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	};
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+	// App.plazasCollection = new App.Collections.Plazas();
+	// App.plazasCollection.fetch();
+	// App.tollsCollection = new App.Collections.Tolls();
+	// App.tollsCollection.fetch();
+
+	// App.router = new App.router();
+	// Backbone.history.start();
+});
+
+
+
+
+
