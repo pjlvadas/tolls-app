@@ -5,3 +5,22 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+require_relative 'database_config'
+require_relative 'models/toll'
+# tolls = Toll.create([{
+# 	name:,
+# 	state:,
+# 	description:,
+# 	latitude:,
+# 	longitude:,
+# 	amount:,
+# 	ez_pass:,
+# 	on_route: false
+# 	}
+# 	])
+
+COPY mytable FROM '/../../../desktop/toll_seed1.csv' WITH CSV HEADER;
+
+
+
+
