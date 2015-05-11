@@ -19,7 +19,7 @@ require_relative 'models/toll'
 # 	}
 # 	])
 
-COPY mytable FROM '/../../../desktop/toll_seed1.csv' WITH CSV HEADER;
+COPY mytable FROM '/../../../desktop/toll_seed1.csv';
 
 
 

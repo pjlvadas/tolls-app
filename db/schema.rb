@@ -16,23 +16,15 @@ ActiveRecord::Schema.define(version: 20150508193916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "plazas", force: :cascade do |t|
+  create_table "tolls", force: :cascade do |t|
     t.string   "name"
     t.string   "state"
-    t.string   "interstate"
-    t.string   "lat"
-    t.string   "lng"
-    t.string   "ez_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "tolls", force: :cascade do |t|
-    t.string   "type"
-    t.string   "direction"
-    t.string   "amount"
+    t.string   "description"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.float    "amount"
     t.boolean  "ez_pass"
-    t.integer  "plaza_id"
+    t.boolean  "on_route"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
