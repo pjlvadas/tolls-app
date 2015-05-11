@@ -1,12 +1,4 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-require_relative 'database_config'
-require_relative 'models/toll'
+
 # tolls = Toll.create([{
 # 	name:,
 # 	state:,
@@ -19,8 +11,31 @@ require_relative 'models/toll'
 # 	}
 # 	])
 
-COPY mytable FROM '/../../../desktop/toll_seed1.csv';
+raw_input = File.open("#{Rails.root}/db/toll_seed1.csv")
 
+raw_input = raw_input.read.split("\r")
+
+raw_input.each do |column|
+
+	name,
+	state,
+	description,
+	latitude,
+	longitude, 
+	amount = column.split(",")
+
+	Toll.create(
+		:name => name,
+		:state => state,
+		:description => description,
+		:latitude => latitude,
+		:longitude => longitude,
+		:amount => amount,
+		:ez_pass => true,
+		:on_route => false
+)
+
+end
 
 
 
