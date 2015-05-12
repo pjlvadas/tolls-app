@@ -31,23 +31,28 @@ var App = {
 	Routers: {}
 };
 
+var boxpolys;
+var map;
+
 $(function() {
 	console.log('APP UP');
-	$('#calc').on('click', 'button', calcRoute);
+	$('#calc').on('click', calcRoute);
 
 	var mapOptions = {
 		zoom: 5,
 		center: new google.maps.LatLng(40, -80.5),
 		mapTypeId: google.maps.MapTypeId.ROADMAP
 		};
-	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-	var routeBoxer = new RouteBoxer();
-	var directionsDisplay = new google.maps.DirectionsRenderer();
-	var directionsService = new google.maps.DirectionsService();	
+	map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);	
 
+});
 
 	var calcRoute = function() {
-	debugger;
+		var allTolls = tollCall();
+		var routeBoxer = new RouteBoxer();
+		var directionsDisplay = new google.maps.DirectionsRenderer();
+		var directionsService = new google.maps.DirectionsService();
+	
 		//RouteBoxer
 		clearBoxes();
 
@@ -69,18 +74,21 @@ $(function() {
 				
 				var distance = parseFloat(1/20);
 				var path = response.routes[0].overview_path;
-				var boxes = routeBoxer.box(path, distance);
+				boxes = routeBoxer.box(path, distance);
 				drawBoxes(boxes);
+				debugger;
 
 				// for (var i = 0; i < boxes.length; i++) {
-				// 		var nBound = boxes[i].Ea.j;
-				// 		var sBound = boxes[i].Ea.A;
-				// 		var wBound = boxes[i].wa.j;
-				// 		var eBound = boxes[i].wa.A;
-				// 	if ( nBound < tollLat && sBound > tollLat && wBound < tollLng && eBound > tollLng ) {
-						
+				//   for (var t = 0; t < tolls.length) {
+				//     if ( nboxes[i].Ea.j < tolls[t].latitude 
+				//     	&& boxes[i].Ea.A > tolls[t].latitude 
+				//     	&& boxes[i].wa.j < tolls[t].longitude 
+				//     	&& boxes[i].wa.A > tolls[t].longitude ) {
+
 				// 	}
+				//   }
 				// }
+			
 			} 
 			else { alert("Directions query failed: " + status);
 			}
@@ -112,13 +120,10 @@ $(function() {
 
 	var tollCall = function() {
 		$.get('/tolls')
-		.done(function(tolls) {
-
-		})
+		.success(function(tolls) {
+		
+		});
 	};
-
-
-});
 
 
 

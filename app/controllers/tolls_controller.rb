@@ -3,10 +3,7 @@ class TollsController < ApplicationController
   def index
   	@tolls = Toll.all
 
-  	respond_to do |format|
-  		format.html{}
-  		format.json { render json: @tolls }
-  	end
+  	render json: @tolls
   end
 
   def new
