@@ -107,26 +107,23 @@ $(function() {
 
 	var tollCall = function() {
 		$.get('/tolls')
-		.success(function(tolls) {
-
+		 .success(function(tolls) {
+		 	debugger
+			for (var i = 0; i < tolls.length; i++) {
+			  for (var t = 0; t < boxes.length; t++) {
+			    if ( boxes[t].Ea.j < tolls[i].latitude 
+			      && boxes[t].Ea.A > tolls[i].latitude 
+			      && boxes[t].wa.j < tolls[i].longitude 
+			      && boxes[t].wa.A > tolls[i].longitude ){
+			    	console.log('WORD UP');
+				} 
+				else { console.log('GOSH DARN IT') }	
+			  }
+			}		
 		});
 	};
 
-	var tollArr = function() {
-		tollCall();
-		for (var i = 0; i < tolls.length; i++) {
-		  for (var t = 0; t < boxes.length) {
-		    if ( boxes[t].Ea.j < tolls[i].latitude 
-		      && boxes[t].Ea.A > tolls[i].latitude 
-		      && boxes[t].wa.j < tolls[i].longitude 
-		      && boxes[t].wa.A > tolls[i].longitude ){
-		    	return true
-			} 
-			else { console.log('GOSH DARN IT')
-		    }	
-		  }
-		}		
-	};
+
 
 
 
