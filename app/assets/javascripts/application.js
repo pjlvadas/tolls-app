@@ -38,6 +38,7 @@ $(function() {
 	console.log('APP UP');
 	$('#calc').on('click', calcRoute);
 	$('#show-tolls').on('click', tollCall);
+	$('#toll-bar').hide;
 
 	var mapOptions = {
 		zoom: 5,
@@ -58,8 +59,8 @@ $(function() {
 		clearBoxes();
 
 		//Directions Request
-		var start = document.getElementById('start').value;
-		var end   = document.getElementById('end').value;
+		start = document.getElementById('start').value;
+		end   = document.getElementById('end').value;
 		var request = {
 			  origin: start,
 			  destination: end,
@@ -73,10 +74,16 @@ $(function() {
 			if (status == google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
 				
+				originLat = response.routes[0].legs[0].start_location.A
+				originLng = response.routes[0].legs[0].start_location.F
+				destLat = response.routes[0].legs[0].end_location.A
+				destLng = response.routes[0].legs[0].end_location.F
+
 				var distance = parseFloat(1/10);
 				var path = response.routes[0].overview_path;
 				boxes = routeBoxer.box(path, distance);
-				drawBoxes(boxes);			
+				drawBoxes(boxes);
+						
 			} else { 
 				alert("Directions query failed: " + status);
 			  }
@@ -107,7 +114,8 @@ $(function() {
 	};
 	
 	var tollArr = []
-	var tollAmts = []
+	var tollAmtS = []
+	var tollAmtN = []
 	var tollBar = document.getElementById('toll-bar');
 	var tollCall = function() {
 		$.get('/tolls')
@@ -119,13 +127,17 @@ $(function() {
 			      && boxes[i].va.j < tolls[t].longitude 
 			      && boxes[i].va.A > tolls[t].longitude ){
 			    	tollArr.push(tolls[t]);
-			    	tollAmts.push(tolls[t].s_amount);
+			    	tollAmtS.push(tolls[t].s_amount);
+			    	tollAmtN.push(tolls[t].n_amount);
 				} 
 				else { console.log('GOSH DARN IT') }	
 			  }
 			}
+			$('#toll-bar').prepend('<ul>YOUR TOLLS</ul>');
 			for (var a = 0; a < tollArr.length; a++) {
-				$('#toll-bar').append('<li>'+tollArr[a].name+', '+tollArr[a].description+', Southbound: $'+tollArr[a].s_amount+', Northbound: $'+tollArr[a].n_amount+'+</li>')
+				if (originLat > destLat ) {
+				$('#toll-bar').append('<ul>'+tollArr[a].name+'</ul>'+'<li>Southbound: $'+tollArr[a].s_amount+'</li>')	
+				} else { $('#toll-bar').append('<ul>'+tollArr[a].name+'</ul>'+'<li>Northbound: $'+tollArr[a].n_amount+'</li>') }
 		    	marker = new google.maps.Marker({
 		    		position: new google.maps.LatLng(tollArr[a].latitude, tollArr[a].longitude),
 		        	map: map

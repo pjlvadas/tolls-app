@@ -14,16 +14,45 @@
  *= require_self
  */
 
-#map-canvas {
-  width: 500px;
-  height: 400px;
-  margin-top: 10px;
-  border: 1px solid black;
+
+section {
+    width: 95%;
+    height: 600px;
+	margin: 5px;
+    background: black;
 }
 
-#toll-bar {
-  height: relative;
-  width: 500px;
-  background-color: white;
-  border: 1px solid black;
+#map-canvas {
+    width: 80%;
+    height: 600px;
+    float: left;
+    border: 1px solid black;
+}
+
+#toll-bar { 
+    margin-left: 80%;
+    width: relative;
+    height: 600px;
+    border: 1px solid black;
+
+    background: white;
+}
+
+#toll-bar ul {
+	margin-left: -30px;
+	font-weight: bold;
+}
+
+#toll-bar li {
+	list-style-type: none;
+	margin-left: 10px;
+	margin-top: -10px;
+}
+
+#directions-panel {
+	height: relative;
+	width: 95%;
+	margin-left: 5px;
+
+	/*background: red;*/
 }
