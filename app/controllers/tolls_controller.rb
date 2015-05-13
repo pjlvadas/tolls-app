@@ -2,13 +2,14 @@ class TollsController < ApplicationController
   
   def index
   	@tolls = Toll.all
-
   	render json: @tolls
   end
+
 
   def new
   	@toll = Toll.new
   end
+
 
   def create
   	@toll = Toll.create(toll_params)
@@ -20,6 +21,7 @@ class TollsController < ApplicationController
   	end
   end
 
+
   def show
   	@toll = Toll.find(params[:id])
 
@@ -29,9 +31,11 @@ class TollsController < ApplicationController
   	end
   end
 
+
   def edit
   	@toll = Toll.find(params[:id])
   end
+
 
   def update
   	@toll = Toll.find(params[:id])
@@ -42,6 +46,7 @@ class TollsController < ApplicationController
   		format.html { render json: @toll }
   	end
   end
+
 
   def destroy 
   	@toll = Toll.find(params[:id])

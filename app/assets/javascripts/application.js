@@ -48,7 +48,7 @@ $(function() {
 });
 
 	var calcRoute = function() {
-		var allTolls = tollCall();
+		// var allTolls = tollCall();
 		var routeBoxer = new RouteBoxer();
 		var directionsDisplay = new google.maps.DirectionsRenderer();
 		var directionsService = new google.maps.DirectionsService();
@@ -75,23 +75,10 @@ $(function() {
 				var distance = parseFloat(1/20);
 				var path = response.routes[0].overview_path;
 				boxes = routeBoxer.box(path, distance);
-				drawBoxes(boxes);
-				debugger;
-
-				// for (var i = 0; i < boxes.length; i++) {
-				//   for (var t = 0; t < tolls.length) {
-				//     if ( nboxes[i].Ea.j < tolls[t].latitude 
-				//     	&& boxes[i].Ea.A > tolls[t].latitude 
-				//     	&& boxes[i].wa.j < tolls[t].longitude 
-				//     	&& boxes[i].wa.A > tolls[t].longitude ) {
-
-				// 	}
-				//   }
-				// }
-			
-			} 
-			else { alert("Directions query failed: " + status);
-			}
+				drawBoxes(boxes);			
+			} else { 
+				alert("Directions query failed: " + status);
+			  }
 		});
 	};
 
@@ -120,10 +107,22 @@ $(function() {
 
 	var tollCall = function() {
 		$.get('/tolls')
-		.success(function(tolls) {
-		
+		 .success(function(tolls) {
+		 	debugger
+			for (var i = 0; i < tolls.length; i++) {
+			  for (var t = 0; t < boxes.length; t++) {
+			    if ( boxes[t].Ea.j < tolls[i].latitude 
+			      && boxes[t].Ea.A > tolls[i].latitude 
+			      && boxes[t].wa.j < tolls[i].longitude 
+			      && boxes[t].wa.A > tolls[i].longitude ){
+			    	console.log('WORD UP');
+				} 
+				else { console.log('GOSH DARN IT') }	
+			  }
+			}		
 		});
 	};
+
 
 
 
