@@ -6,8 +6,8 @@ class CreateTolls < ActiveRecord::Migration
         t.string  :description
     	t.float   :latitude
     	t.float   :longitude
-    	t.float   :amount
-    	t.boolean :ez_pass
+    	t.float   :n_amount
+        t.float   :s_amount
         t.boolean :on_route
 
     	t.timestamps
