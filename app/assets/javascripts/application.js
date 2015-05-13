@@ -119,14 +119,13 @@ $(function() {
 			      && boxes[i].va.j < tolls[t].longitude 
 			      && boxes[i].va.A > tolls[t].longitude ){
 			    	tollArr.push(tolls[t]);
-			    	tollAmts.push(tolls[t].amount);
+			    	tollAmts.push(tolls[t].s_amount);
 				} 
 				else { console.log('GOSH DARN IT') }	
 			  }
 			}
-			debugger
 			for (var a = 0; a < tollArr.length; a++) {
-				$('#toll-bar').append('<li>'+tollArr[a].name+", "+tollArr[a].description+", $"+tollArr[a].amount+'</li>')
+				$('#toll-bar').append('<li>'+tollArr[a].name+', '+tollArr[a].description+', Southbound: $'+tollArr[a].s_amount+', Northbound: $'+tollArr[a].n_amount+'+</li>')
 		    	marker = new google.maps.Marker({
 		    		position: new google.maps.LatLng(tollArr[a].latitude, tollArr[a].longitude),
 		        	map: map

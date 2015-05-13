@@ -1,4 +1,4 @@
-raw_input = File.open("#{Rails.root}/db/toll_seed1.csv")
+raw_input = File.open("#{Rails.root}/db/toll_seed2.csv")
 
 raw_input = raw_input.read.split("\r")
 
@@ -9,7 +9,8 @@ raw_input.each do |column|
 	description,
 	latitude,
 	longitude, 
-	amount = column.split(",")
+	n_amount,
+	s_amount = column.split(",")
 
 	Toll.create(
 		:name => name,
@@ -17,9 +18,8 @@ raw_input.each do |column|
 		:description => description,
 		:latitude => latitude,
 		:longitude => longitude,
-		:amount => amount,
-		:ez_pass => true,
-		:on_route => false )
+		:n_amount => n_amount,
+		:s_amount => s_amount )
 	end
 
 
