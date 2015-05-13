@@ -104,18 +104,18 @@ $(function() {
 		}
 		boxpolys = null;
 	};
-
+	var tollArr = []
 	var tollCall = function() {
 		$.get('/tolls')
 		 .success(function(tolls) {
 		 	debugger
-			for (var i = 0; i < tolls.length; i++) {
-			  for (var t = 0; t < boxes.length; t++) {
-			    if ( boxes[t].Ea.j < tolls[i].latitude 
-			      && boxes[t].Ea.A > tolls[i].latitude 
-			      && boxes[t].wa.j < tolls[i].longitude 
-			      && boxes[t].wa.A > tolls[i].longitude ){
-			    	console.log('WORD UP');
+			for (var t = 0; t < tolls.length; t++) {
+			  for (var i = 0; i < boxes.length; i++) {
+			    if ( boxes[i].Ea.j > tolls[t].latitude 
+			      && boxes[i].Ea.A < tolls[t].latitude 
+			      && boxes[i].va.j < tolls[t].longitude 
+			      && boxes[i].va.A > tolls[t].longitude ){
+			    	tollArr.push([tolls[t].latitude, tolls[t].longitude]);
 				} 
 				else { console.log('GOSH DARN IT') }	
 			  }
