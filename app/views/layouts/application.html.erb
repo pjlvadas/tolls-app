@@ -11,23 +11,26 @@
 </head>
 <body>
 	<h1>Tolls</h1>
-<!-- 	<input id="start" type="text" onchange="calcRoute();" value="">	
-	<input id="end" type="text" onchange="calcRoute();" value=""> -->
 	<div id='control'>
 		<strong>Origin: </strong>
-		<select id="start">
+		<input id="start" type="text" value="">	
+		<!-- <select id="start">
 		  <option value="new york, ny">New York</option>
 		  <option value="wilmington, de">Delaware</option>
-		</select>
+		</select> -->
 		<strong>Destination: </strong>
-		<select id="end">
+		<input id="end" type="text" value="">
+		<!-- <select id="end">
 		  <option value="new york, ny">New York</option>
 		  <option value="wilmington, de">Delaware</option>
-		</select>
+		</select> -->
 		<button id="calc">Calculate</button>
 	</div>
 	<div id='map-canvas'></div>
-	<div id='toll-list'</div>
-	<div id='directions-panel'></div>
+	<div id='directions-panel'>
+		<button id="show-tolls">Show Tolls</button>
+	</div>
+	<div id='toll-bar'>
+	</div>
 </body>
 </html>
