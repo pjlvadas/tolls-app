@@ -73,7 +73,7 @@ $(function() {
 			if (status == google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
 				
-				var distance = parseFloat(1/20);
+				var distance = parseFloat(1/10);
 				var path = response.routes[0].overview_path;
 				boxes = routeBoxer.box(path, distance);
 				drawBoxes(boxes);			
@@ -107,6 +107,7 @@ $(function() {
 	};
 	
 	var tollArr = []
+	var tollAmts = []
 	var tollBar = document.getElementById('toll-bar');
 	var tollCall = function() {
 		$.get('/tolls')
@@ -118,37 +119,19 @@ $(function() {
 			      && boxes[i].va.j < tolls[t].longitude 
 			      && boxes[i].va.A > tolls[t].longitude ){
 			    	tollArr.push(tolls[t]);
-			    	console.log('COOL BEANS')
+			    	tollAmts.push(tolls[t].amount);
 				} 
 				else { console.log('GOSH DARN IT') }	
 			  }
 			}
 			debugger
 			for (var a = 0; a < tollArr.length; a++) {
-			$('#toll-bar').append('<li>'+tollArr[a].name+", "+tollArr[a].description+", $"+tollArr[a].amount+'</li>')};
-		    
-		    for (i = 0; i < tollArr.length; i++) {  
+				$('#toll-bar').append('<li>'+tollArr[a].name+", "+tollArr[a].description+", $"+tollArr[a].amount+'</li>')
 		    	marker = new google.maps.Marker({
-		    		position: new google.maps.LatLng(tollArr[i].latitude, tollArr[i].longitude),
+		    		position: new google.maps.LatLng(tollArr[a].latitude, tollArr[a].longitude),
 		        	map: map
 		      	});
-
-			    new google.maps.event.addListener(marker, 'click', (function(marker, i) {
-			    	return function() {
-			    		infowindow.setContent(tollArr[i].amount);
-			    		infowindow.open(map, marker);
-			    	}
-			    }));
 			};	
 		});
 	};
 
-    // var map = new google.maps.Map(document.getElementById('map'), {
-    // 	zoom: 10,
-    // 	center: new google.maps.LatLng(-33.92, 151.25),
-    // 	mapTypeId: google.maps.MapTypeId.ROADMAP
-    // });
-
-    // var infowindow = new google.maps.InfoWindow();
-
-    // var marker, i;
