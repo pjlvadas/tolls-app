@@ -10,7 +10,7 @@
   <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/routeboxer/src/RouteBoxer.js"></script>
 </head>
 <body>
-	<h1>Tolls</h1>
+	<h1>TollZapp</h1>
 	<div id='control'>
 		<strong>Origin: </strong>
 		<input id="start" type="text" value="">	
@@ -25,12 +25,12 @@
 		  <option value="wilmington, de">Delaware</option>
 		</select> -->
 		<button id="calc">Calculate</button>
+		<button id="show-tolls">Show Tolls</button> 
 	</div>
-	<div id='map-canvas'></div>
-	<div id='directions-panel'>
-		<button id="show-tolls">Show Tolls</button>
-	</div>
-	<div id='toll-bar'>
-	</div>
+	<section>
+		<div id='map-canvas'></div>
+		<div id='toll-bar'></div>
+	</section>
+		<div id='directions-panel'></div>
 </body>
 </html>

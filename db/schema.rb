@@ -22,9 +22,8 @@ ActiveRecord::Schema.define(version: 20150508193916) do
     t.string   "description"
     t.float    "latitude"
     t.float    "longitude"
-    t.float    "amount"
-    t.boolean  "ez_pass"
-    t.boolean  "on_route"
+    t.integer  "n_amount"
+    t.integer  "s_amount"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,28 +1,19 @@
-== README
+== TollCalc
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* This is an app to help identify the location of tolls you will encounter on a given drive.
 
-Things you may want to cover:
+* The MVP focuses on the I-95 Corridor between New York City and Washington D.C.
 
-* Ruby version
+* The app utilizes the Google Maps API library and an additional RouteBoxer library
 
-* System dependencies
+* After Google Maps calculates a route and provides directions, RouteBoxer draws individual boxes that cover the entire route.
 
-* Configuration
+* Using the coordinates of these boxes, one is able to determine whether or not specified coordinates fall within the border of boxes.
 
-* Database creation
+* The Lat/Lng coordinates for each toll plaza were manually identified using information from the US Dept of Transportation Highway Authority and several state run toll websites.
 
-* Database initialization
+How to Use
 
-* How to run the test suite
+* Enter Origin and Destination and click the 'Calculate' button to get directions.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+* After the directions load, click "Show Tolls" and maybe go get a pizza or something while it loads. After you finish your pizza, you can view all the toll booths your route passes through.

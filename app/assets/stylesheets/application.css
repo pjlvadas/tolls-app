@@ -14,16 +14,129 @@
  *= require_self
  */
 
-#map-canvas {
-  width: 500px;
-  height: 400px;
-  margin-top: 10px;
-  border: 1px solid black;
+body {
+	background-color: #D0E2B7;
 }
 
-#toll-bar {
-  height: relative;
-  width: 500px;
-  background-color: white;
-  border: 1px solid black;
+section {
+    width: 95%;
+    height: 600px;
+	margin: 5px;
+    background: black;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+h1 {
+	margin-left: 20px;
+	color: #2960B7;
+	font-weight: bold;
+	font-size: 40px;
+}
+
+#map-canvas {
+    width: 80%;
+    height: 600px;
+    float: left;
+    border: 1px solid black;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+#toll-bar { 
+	padding-top: -10px;
+    margin-left: 80%;
+    width: relative;
+    height: 600px;
+    border: 1px solid black;
+    padding-left: 5px;
+    background-color: #e2eade;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#toll-bar ul {
+	margin-left: -25px;
+	font-weight: bold;
+	color: black;
+}
+
+#toll-bar li {
+	list-style-type: none;
+	margin-left: 15px;
+	margin-top: -10px;
+	font-weight: bold;
+	color: #4688ea;
+}
+
+
+#directions-panel {
+	height: relative;
+	width: 74%;
+	margin-top: 5px;
+	margin-left: 20px;
+	border: 1px solid black;
+	background-color: #FAF2C9;
+	border-radius: 4px;
+	padding-left: 15px;
+	padding-right: 15px;
+
+	/*background: red;*/
+}
+
+#control {
+	color: #F75448;
+	font-size: 20px;
+	font-family: times;
+	margin-left: 20px;
+	margin-bottom: 10px;
+}
+
+/*#control strong {
+	margin-top: 10px;
+}*/
+
+#control input {
+	border: 1px solid black;
+	height: 18px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	padding-left: 5px;
+	border-radius: 4px;
+}
+
+#toll-total {
+	font-size: 30px;
+	color: red;
+	padding-top: -5px;
+}
+
+.adp-summary {
+	font-weight: bold;
+}
+
+button {
+	background: #2960B7;
+	color: white;
+	border-radius: 5px;
+}
+
+button:hover {
+	background: #073f93;
+	color: #B2D0FE;
+}
+
+button:active,
+button:focus {
+	background: #3271D6;
+
+}
+
+button:before {
+/*	border-right-color: white;*/
+}
+
+button:focus:before,
+button:active:before {
+/*	border-right-color: #c42f2f;*/
 }
