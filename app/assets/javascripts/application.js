@@ -132,17 +132,29 @@ $(function() {
 				} 
 				else { console.log('GOSH DARN IT') }	
 			  }
-			}
-			$('#toll-bar').prepend('<ul>YOUR TOLLS</ul>');
+			};
+
 			for (var a = 0; a < tollArr.length; a++) {
 				if (originLat > destLat ) {
 				$('#toll-bar').append('<ul>'+tollArr[a].name+'</ul>'+'<li>Southbound: $'+tollArr[a].s_amount+'</li>')	
 				} else { $('#toll-bar').append('<ul>'+tollArr[a].name+'</ul>'+'<li>Northbound: $'+tollArr[a].n_amount+'</li>') }
-		    	marker = new google.maps.Marker({
-		    		position: new google.maps.LatLng(tollArr[a].latitude, tollArr[a].longitude),
-		        	map: map
-		      	});
-			};	
+		    
+			    marker = new google.maps.Marker({
+			    	position: new google.maps.LatLng(tollArr[a].latitude, tollArr[a].longitude),
+			        map: map
+			    });
+		    };
+
+
+		    var total = 0;	
+			for (var b = 0; b < tollArr.length; b++ ) {
+				if (originLat > destLat ) {
+					total += tollArr[b].s_amount;
+				} else { total += tollArr[b].n_amount }
+			};
+				$('#toll-bar').prepend('<ul id="toll-total">Total: $'+total+'</sec>')
+
+				
 		});
 	};
 
