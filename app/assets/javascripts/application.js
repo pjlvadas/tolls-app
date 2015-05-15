@@ -41,7 +41,7 @@ $(function() {
 	$('#toll-bar').hide;
 
 	// Sets default map view
-	var mapOptions = {
+	mapOptions = {
 		zoom: 5,
 		center: new google.maps.LatLng(38.803057, -80.527466),
 		mapTypeId: google.maps.MapTypeId.ROADMAP
@@ -52,8 +52,7 @@ $(function() {
 
 });
 
-	var calcRoute = function() {
-		
+	var calcRoute = function() {	
 		// Defining the necessary variables for GoogleMaps and RouteBoxer
 		var routeBoxer = new RouteBoxer();
 		var directionsDisplay = new google.maps.DirectionsRenderer();
@@ -65,7 +64,7 @@ $(function() {
 		//Directions request begins by grabbing user input values
 		start = document.getElementById('start').value;
 		end   = document.getElementById('end').value;
-		
+  	    		
 		//Necessary paramaters for directions request
 		var request = {
 			  origin: start,
@@ -78,12 +77,37 @@ $(function() {
 
 		//Sets the div in which the directions text will be rendered
 		directionsDisplay.setPanel(document.getElementById('directions-panel'));
-
+		// var icons = {
+		// 	start: new google.maps.MarkerImage(
+		// 		'https://lh3.googleusercontent.com/pTGdUa6U45dAk24bGVRMzqLrTOYqPc4IcAj9zj0dNUmEDRf2JuDaaiGwugU-SBtxh3Q-jxhLlpe5Op8=w1379-h658',
+		// 		new google.maps.Size(44,32),
+		// 		new google.maps.Point(0,0),
+		// 		new google.maps.Point(22,32)),
+		// 	end: new google.maps.MarkerImage(
+		// 		'https://lh5.googleusercontent.com/TTHZMmll0-fbwHMKqgF-JBIxT7ThXMyLZQ3yX4TQ0_EC-tFFjY3Yg-2FYDfHUEnMNtmpGzsqVEsKzE8=w1379-h658',
+		// 		new google.maps.Size(44,32),
+		// 		new google.maps.Point(0,0),
+		// 		new google.maps.Point(22,32)
+		// 		)
+		// };
 		//Directions function
 		directionsService.route(request, function(response, status) {
 			if (status == google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
 			
+			//Origin/Destination Icons	
+				// new google.maps.Marker({
+				// 	map: response.routes[0].legs[0].start_location, 
+				// 	icon: icons.start, 
+				// 	title: 'Origin'
+				// });
+				// new google.maps.Marker({
+				// 	map: response.routes[0].legs[0].end_location, 
+				// 	icon: icons.end, 
+				// 	title: 'Destination'
+				// });
+			
+
 			//Variables set to determine direction of the route
 				originLat = response.routes[0].legs[0].start_location.A
 				originLng = response.routes[0].legs[0].start_location.F
@@ -101,6 +125,15 @@ $(function() {
 			  }
 		});
 	};
+
+	// var makeMarker = function(position, icon, title) {
+	// 	new google.maps.Marker({
+	// 		map: map,
+	// 		icon: icon,
+	// 		title: title
+	// 	});
+	// }
+
 
 // Draws boxes covering the entire route
 // Box coordinates and size are calculated during the Directions Service request
@@ -163,9 +196,12 @@ $(function() {
 				} else { $('#toll-bar').append('<ul>'+tollArr[a].name+'</ul>'+'<li>Northbound: $'+tollArr[a].n_amount+'</li>') }
 		    
 		    //Adds pins to tolls existing on the route
-			    marker = new google.maps.Marker({
+			
+		    var image = 'https://lh4.googleusercontent.com/QbllGho4-sKWcrOljXS581OFT8jU8uGE4EMy48CDzPGcmo_88MPwC-jp0wSKNR-y-5bikg=s190'
+			var marker = new google.maps.Marker({
 			    	position: new google.maps.LatLng(tollArr[a].latitude, tollArr[a].longitude),
-			        map: map
+			        map: map,
+			        icon: image
 			    });
 		    };
 
