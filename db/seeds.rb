@@ -1,4 +1,6 @@
-raw_input = File.open("#{Rails.root}/db/toll_seed2.csv")
+raw_input = File.open("#{Rails.root}/db/toll_seed4.csv")
+
+Toll.destroy_all
 
 raw_input = raw_input.read.split("\r")
 

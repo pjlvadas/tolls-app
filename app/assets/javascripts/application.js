@@ -119,11 +119,13 @@ $(function() {
 				var path = response.routes[0].overview_path;
 				boxes = routeBoxer.box(path, distance);
 				drawBoxes(boxes);
+				debugger;
 						
 			} else { 
 				alert("Directions query failed: " + status);
 			  }
 		});
+		// $('#control').append('<button id="show-tolls">Show Tolls</button>');
 	};
 
 	// var makeMarker = function(position, icon, title) {
@@ -175,8 +177,8 @@ $(function() {
 		// Determines if the toll lat/long are within the boundaries of any box
 			for (var t = 0; t < tolls.length; t++) {
 			  for (var i = 0; i < boxes.length; i++) {
-			    if ( boxes[i].Ea.j > tolls[t].latitude 
-			      && boxes[i].Ea.A < tolls[t].latitude 
+			    if ( boxes[i].Da.j > tolls[t].latitude 
+			      && boxes[i].Da.A < tolls[t].latitude 
 			      && boxes[i].va.j < tolls[t].longitude 
 			      && boxes[i].va.A > tolls[t].longitude ){
 			    //Dividing info into pertinent arrays
@@ -197,7 +199,7 @@ $(function() {
 		    
 		    //Adds pins to tolls existing on the route
 			
-		    var image = 'https://lh4.googleusercontent.com/QbllGho4-sKWcrOljXS581OFT8jU8uGE4EMy48CDzPGcmo_88MPwC-jp0wSKNR-y-5bikg=s190'
+		    var image = 'https://lh5.googleusercontent.com/jMrZunZEoKSDTmz6aYAnzFuNg5dDMn4RSB-6CSHr5jMctS-9SXbI9ZYLfwfHVxPQiz16Hr88_bFCZ3c=w989-h658'
 			var marker = new google.maps.Marker({
 			    	position: new google.maps.LatLng(tollArr[a].latitude, tollArr[a].longitude),
 			        map: map,
