@@ -14,6 +14,8 @@
 
 How to Use
 
+* Run seeds.rb to populate you database with Toll Locations
+
 * Enter Origin and Destination and click the 'Calculate' button to get directions.
 
 * After the directions load, click "Show Tolls" and maybe go get a pizza or something while it loads. After you finish your pizza, you can view all the toll booths your route passes through.
