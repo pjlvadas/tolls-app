@@ -77,35 +77,11 @@ $(function() {
 
 		//Sets the div in which the directions text will be rendered
 		directionsDisplay.setPanel(document.getElementById('directions-panel'));
-		// var icons = {
-		// 	start: new google.maps.MarkerImage(
-		// 		'https://lh3.googleusercontent.com/pTGdUa6U45dAk24bGVRMzqLrTOYqPc4IcAj9zj0dNUmEDRf2JuDaaiGwugU-SBtxh3Q-jxhLlpe5Op8=w1379-h658',
-		// 		new google.maps.Size(44,32),
-		// 		new google.maps.Point(0,0),
-		// 		new google.maps.Point(22,32)),
-		// 	end: new google.maps.MarkerImage(
-		// 		'https://lh5.googleusercontent.com/TTHZMmll0-fbwHMKqgF-JBIxT7ThXMyLZQ3yX4TQ0_EC-tFFjY3Yg-2FYDfHUEnMNtmpGzsqVEsKzE8=w1379-h658',
-		// 		new google.maps.Size(44,32),
-		// 		new google.maps.Point(0,0),
-		// 		new google.maps.Point(22,32)
-		// 		)
-		// };
+
 		//Directions function
 		directionsService.route(request, function(response, status) {
 			if (status == google.maps.DirectionsStatus.OK) {
 				directionsDisplay.setDirections(response);
-			
-			//Origin/Destination Icons	
-				// new google.maps.Marker({
-				// 	map: response.routes[0].legs[0].start_location, 
-				// 	icon: icons.start, 
-				// 	title: 'Origin'
-				// });
-				// new google.maps.Marker({
-				// 	map: response.routes[0].legs[0].end_location, 
-				// 	icon: icons.end, 
-				// 	title: 'Destination'
-				// });
 			
 
 			//Variables set to determine direction of the route
@@ -119,7 +95,6 @@ $(function() {
 				var path = response.routes[0].overview_path;
 				boxes = routeBoxer.box(path, distance);
 				drawBoxes(boxes);
-				debugger;
 						
 			} else { 
 				alert("Directions query failed: " + status);
@@ -128,22 +103,13 @@ $(function() {
 		// $('#control').append('<button id="show-tolls">Show Tolls</button>');
 	};
 
-	// var makeMarker = function(position, icon, title) {
-	// 	new google.maps.Marker({
-	// 		map: map,
-	// 		icon: icon,
-	// 		title: title
-	// 	});
-	// }
-
-
 // Draws boxes covering the entire route
 // Box coordinates and size are calculated during the Directions Service request
-	var drawBoxes = function(boxArray) {
-		boxpolys = new Array(boxArray.length);
-		for (var i = 0; i < boxArray.length; i++) {
+	var drawBoxes = function(boxes) {
+		boxpolys = new Array(boxes.length);
+		for (var i = 0; i < boxes.length; i++) {
 			boxpolys[i] = new google.maps.Rectangle({
-				bounds: boxArray[i],
+				bounds: boxes[i],
 				fillOpacity: 0,
 				strokeOpacity: .7,
 				strokeColor: '#000000',
@@ -177,10 +143,11 @@ $(function() {
 		// Determines if the toll lat/long are within the boundaries of any box
 			for (var t = 0; t < tolls.length; t++) {
 			  for (var i = 0; i < boxes.length; i++) {
-			    if ( boxes[i].Da.j > tolls[t].latitude 
-			      && boxes[i].Da.A < tolls[t].latitude 
-			      && boxes[i].va.j < tolls[t].longitude 
-			      && boxes[i].va.A > tolls[t].longitude ){
+
+			    if ( boxes[i].za.j > tolls[t].latitude 
+			      && boxes[i].za.A < tolls[t].latitude 
+			      && boxes[i].ra.j < tolls[t].longitude 
+			      && boxes[i].ra.A > tolls[t].longitude ){
 			    //Dividing info into pertinent arrays
 			    //Important to separate tolls paid going north vs. south	
 			    	tollArr.push(tolls[t]);
@@ -194,12 +161,15 @@ $(function() {
 			//Logic for displaying toll amounts based on route direction
 			for (var a = 0; a < tollArr.length; a++) {
 				if (originLat > destLat ) {
+					if (tollArr[a].s_amount > 0) {
 				$('#toll-bar').append('<ul>'+tollArr[a].name+'</ul>'+'<li>Southbound: $'+tollArr[a].s_amount+'</li>')	
-				} else { $('#toll-bar').append('<ul>'+tollArr[a].name+'</ul>'+'<li>Northbound: $'+tollArr[a].n_amount+'</li>') }
+				}} else { 
+					if (tollArr[a].n_amount > 0) {
+						$('#toll-bar').append('<ul>'+tollArr[a].name+'</ul>'+'<li>Northbound: $'+tollArr[a].n_amount+'</li>') }}
 		    
 		    //Adds pins to tolls existing on the route
 			
-		    var image = 'https://lh5.googleusercontent.com/jMrZunZEoKSDTmz6aYAnzFuNg5dDMn4RSB-6CSHr5jMctS-9SXbI9ZYLfwfHVxPQiz16Hr88_bFCZ3c=w989-h658'
+		    var image = 'https://lh5.googleusercontent.com/yFkBYo63yVcDjYf3GwIIhJE_3tZYY3nKumf3fcDdV6-vpYZ_5M9RKSCrBl-QWzVcgSu0HcynkFTMFvU=w1168-h658'
 			var marker = new google.maps.Marker({
 			    	position: new google.maps.LatLng(tollArr[a].latitude, tollArr[a].longitude),
 			        map: map,
